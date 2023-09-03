@@ -2,6 +2,7 @@ package com.example.learnenglish;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -11,6 +12,7 @@ import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentChange;
@@ -28,6 +30,8 @@ public class WordBank extends AppCompatActivity {
     public TextToSpeech mtts;
     RecyclerView word_bank;
 
+//    ImageView item;
+
     ArrayList<ModelWordBank> modelArrayList;
     AdapterWordBank myAdapter;
     FirebaseFirestore firebaseFirestore;
@@ -42,6 +46,8 @@ public class WordBank extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_word_bank);
+
+
 
         Intent i =getIntent();
 
@@ -90,5 +96,12 @@ public class WordBank extends AppCompatActivity {
                         }
                     }
                 });
+
+//
+//        item = findViewById(R.id.item);
+//
+//        Glide.with(this)
+//                .load("images/alphabet-word-images-1296137_640.webp")
+//                .into(item);
     }
 }

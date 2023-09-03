@@ -4,7 +4,8 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
-    android:orientation="vertical">
+    android:orientation="horizontal">
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -26,7 +27,7 @@
                 app:cardCornerRadius="20dp"
                 android:layout_margin="5dp">
                 <ImageView
-                    android:id="@+id/docDp"
+                    android:id="@+id/item"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:scaleType="centerCrop" />
@@ -59,9 +60,10 @@
 
             <ImageView
                 android:id="@+id/play"
-                android:background="@drawable/baseline_play_arrow_24"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:background="@drawable/play"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:padding="20px"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:text="Play"
