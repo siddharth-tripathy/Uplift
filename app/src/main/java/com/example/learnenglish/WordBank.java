@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
@@ -37,7 +38,7 @@ public class WordBank extends AppCompatActivity {
     FirebaseFirestore firebaseFirestore;
     FirebaseAuth mAuth;
     FirebaseUser mUser;
-    ImageView SettingsBackBtn;
+    TextView title;
 
 
     String content = "";
@@ -50,13 +51,36 @@ public class WordBank extends AppCompatActivity {
 
 
         Intent i =getIntent();
+        title = findViewById(R.id.title);
 
         String category =i.getStringExtra("Category");
+
+        switch (category){
+            case "Tools":
+                title.setText("Tools");
+                break;
+            case "Symbols":
+                title.setText("Symbol");
+                break;
+            case "Logistics":
+                title.setText("Logistics");
+                break;
+            case "QualityControl":
+                title.setText("Quality Control");
+                break;
+            case "SafetyToolsAndSign":
+                title.setText("Safety Tools & Sign");
+                break;
+            default:
+                title.setText("Title");
+                break;
+
+        }
 
         mtts = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
-                Log.i("MainActivity", "onCreate: " + (status == TextToSpeech.SUCCESS ? "Success" : "Failure"));
+                Log.i("WordBankActivity", "onCreate: " + (status == TextToSpeech.SUCCESS ? "Success" : "Failure"));
             }
         });
 

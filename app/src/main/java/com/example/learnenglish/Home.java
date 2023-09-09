@@ -3,10 +3,13 @@ package com.example.learnenglish;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -25,12 +28,12 @@ import java.util.Date;
 
 public class Home extends AppCompatActivity {
 
-    ImageView tools, logistics, symbol;
+    ImageView tools, logistics, symbol, quality, safety;
     TextView name;
-
     FirebaseFirestore db;
-
     FirebaseUser user;
+    CardView alphabets;
+    TextToSpeech tts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,15 +43,14 @@ public class Home extends AppCompatActivity {
         tools = (ImageView) findViewById(R.id.tools);
         logistics = (ImageView) findViewById(R.id.logistics) ;
         symbol = (ImageView) findViewById(R.id.symbol);
+        quality = (ImageView) findViewById(R.id.quality);
+        safety = (ImageView) findViewById(R.id.safety);
+
+        alphabets = findViewById(R.id.alphabets);
+
         name = findViewById(R.id.name);
-        tools.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(Home.this, WordBank.class);
-                i.putExtra("Category", "Tools");
-                startActivity(i);
-            }
-        });
+
+
 
         db = FirebaseFirestore.getInstance();
 
@@ -65,13 +67,20 @@ public class Home extends AppCompatActivity {
                             if (document.exists()) {
                                 name.setText(document.getString("name"));
                             } else {
-
+                                
                             }
                         }
                     }
                 });
 
-
+        tools.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Home.this, WordBank.class);
+                i.putExtra("Category", "Tools");
+                startActivity(i);
+            }
+        });
 
         logistics.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,6 +99,34 @@ public class Home extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        quality.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Home.this, WordBank.class);
+                i.putExtra("Category", "QualityControl");
+                startActivity(i);
+            }
+        });
+
+        safety.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Home.this, WordBank.class);
+                i.putExtra("Category", "SafetyToolsAndSign");
+                startActivity(i);
+            }
+        });
+
+        alphabets.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Home.this, Alphabets.class);
+                startActivity(i);
+            }
+        });
+
+
 
 
     }
