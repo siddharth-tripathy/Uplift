@@ -75,11 +75,13 @@ public class Alphabets extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (i<=total){
-                    recyclerView.smoothScrollToPosition(i);
                     i++;
+                    recyclerView.smoothScrollToPosition(i);
+
                 }
             }
         });
+
 //        recyclerView.post(new Runnable() {
 //            @Override
 //            public void run() {
