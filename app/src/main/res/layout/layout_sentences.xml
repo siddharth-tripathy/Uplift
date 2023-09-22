@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@color/white">
+
+
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -23,6 +25,11 @@
             android:orientation="horizontal"
             android:layout_margin="10dp"
             android:layout_gravity="center_vertical">
+            <androidx.cardview.widget.CardView
+                android:id="@+id/dImg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            </androidx.cardview.widget.CardView>
 
             <LinearLayout
                 android:id="@+id/names"
@@ -49,15 +56,6 @@
                     android:text="नाम"
                     android:textColor="@color/black"
                     android:textSize="13sp"/>
-
-                <TextView
-                    android:id="@+id/silent_word"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="s"
-                    android:textColor="@color/black"
-                    android:textSize="13sp"/>
-
             </LinearLayout>
 
             <ImageView
@@ -77,9 +75,6 @@
                 android:textSize="12sp" />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
-
-
-
 
 
 </LinearLayout>

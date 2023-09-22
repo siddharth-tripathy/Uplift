@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/white"
-    tools:context=".Alphabets">
+    tools:context=".Homophones">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -17,28 +17,32 @@
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
+            android:layout_marginTop="30dp"
             android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:text="अक्षर"
+            android:text="होमोफोन्स"
             android:textColor="@color/white"
             android:fontFamily="@font/ubuntu_light"
             android:textSize="28dp" />
+
+        <TextView
+            android:id="@+id/title_exp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_below="@+id/title"
+            android:text="शब्द जिसका उच्चारण दूसरे शब्द के समान ही होता है लेकिन उसकी वर्तनी और अर्थ अलग होता है"
+            android:textColor="@color/white"
+            android:fontFamily="@font/ubuntu_light"
+            android:textSize="18dp" />
     </RelativeLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/alpha"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"/>
 
-    <Button
-        android:id="@+id/next"
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginTop="10dp"
+        android:id="@+id/homop"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/button_bg"
-        android:layout_margin="20dp"
-        android:textColor="#000428"
-        android:textSize="22sp"
-        android:text="अगला"/>
+        android:layout_height="wrap_content"/>
+
 </LinearLayout>

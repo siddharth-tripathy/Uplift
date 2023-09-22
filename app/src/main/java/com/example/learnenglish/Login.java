@@ -5,6 +5,7 @@ import static android.content.ContentValues.TAG;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,6 +26,7 @@ public class Login extends AppCompatActivity {
     private Button submit;
     private TextView signup;
     private FirebaseAuth mAuth;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +38,6 @@ public class Login extends AppCompatActivity {
         submit = findViewById(R.id.submit);
         signup = findViewById(R.id.signup);
         mAuth = FirebaseAuth.getInstance();
-
-
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -45,24 +45,41 @@ public class Login extends AppCompatActivity {
                 String password = pass.getText().toString();
 //                Toast.makeText(getApplicationContext(), email + password, Toast.LENGTH_LONG).show();
 
-                mAuth.signInWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(Login.this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    Toast.makeText(getApplicationContext(), "Sign-up Successful", Toast.LENGTH_LONG).show();
-                                    Intent a = new Intent(Login.this, Home.class);
-                                    a.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                    startActivity(a);
-                                    finish();
-                                } else {
-                                    // If sign in fails, display a message to the user.
-                                    Log.w(TAG, "signInWithEmail:failure", task.getException());
-                                    Toast.makeText(Login.this, "Authentication failed.",
-                                            Toast.LENGTH_SHORT).show();
+                if(email.isEmpty() || password.isEmpty())
+                {
+                    Toast.makeText(getApplicationContext(), "Enter Mobile Number and Password", Toast.LENGTH_LONG).show();
+                }
+                else {
+                    progressDialog = new ProgressDialog(Login.this);
+
+                    progressDialog.setMessage("Please Wait...");
+                    progressDialog.setTitle("Logging In...");
+                    progressDialog.setCanceledOnTouchOutside(false);
+                    progressDialog.show();
+                    email += "@learnenglish.com";
+                    mAuth.signInWithEmailAndPassword(email, password)
+                            .addOnCompleteListener(Login.this, new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    progressDialog.dismiss();
+                                    if (task.isSuccessful()) {
+                                        Toast.makeText(getApplicationContext(), "Login Successful", Toast.LENGTH_LONG).show();
+                                        Intent a = new Intent(Login.this, Home.class);
+                                        a.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                        startActivity(a);
+                                        finish();
+                                    } else {
+
+                                        // If sign in fails, display a message to the user.
+                                        Log.w(TAG, "signInWithEmail:failure", task.getException());
+                                        Toast.makeText(Login.this, "Authentication failed.",
+                                                Toast.LENGTH_SHORT).show();
+                                    }
                                 }
-                            }
-                        });
+                            });
+
+                }
+
             }
         });
 

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context=".Quiz">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:background="@drawable/top_bar_bg">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:text="वर्णमाला प्रश्नोत्तरी"
+            android:textColor="@color/white"
+            android:fontFamily="@font/ubuntu_light"
+            android:textSize="28dp" />
+
+        <TextView
+            android:id="@+id/title_exp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_below="@+id/title"
+            android:text="नीचे दी गई ध्वनि को पहचानें और सही विकल्प चुनें"
+            android:textColor="@color/white"
+            android:fontFamily="@font/ubuntu_light"
+            android:textSize="18dp" />
+    </RelativeLayout>
+
+    <ImageButton
+        android:id="@+id/ques"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:src="@drawable/play"
+        android:background="#00000000"/>
+
+    <TextView
+        android:id="@+id/opt1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="opt1"
+        android:textSize="20sp"
+        android:padding="10dp"
+        android:textColor="@color/black"
+        android:background="@drawable/border"/>
+
+    <TextView
+        android:id="@+id/opt2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="opt1"
+        android:textSize="20sp"
+        android:padding="10dp"
+        android:textColor="@color/black"
+        android:background="@drawable/border"/>
+
+
+    <TextView
+        android:id="@+id/opt3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="opt1"
+        android:padding="10dp"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:background="@drawable/border"/>
+
+
+    <TextView
+        android:id="@+id/opt4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="opt1"
+        android:padding="10dp"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:background="@drawable/border"/>
+
+    <Button
+        android:id="@+id/next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_margin="20dp"
+        android:text="अगला"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:background="#00FF00"/>
+</LinearLayout>

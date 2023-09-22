@@ -16,6 +16,7 @@ import java.util.ArrayList;
 public class Alphabets extends AppCompatActivity {
 
     private ArrayList<String> alphabet = new ArrayList<>();
+    private ArrayList<String> alpha_pro_hindi = new ArrayList<>();
 
     TextToSpeech tts;
     Button next;
@@ -54,6 +55,33 @@ public class Alphabets extends AppCompatActivity {
         alphabet.add("Y");
         alphabet.add("Z");
 
+        alpha_pro_hindi.add("ए");
+        alpha_pro_hindi.add("बी");
+        alpha_pro_hindi.add("सी");
+        alpha_pro_hindi.add("डी");
+        alpha_pro_hindi.add("इ");
+        alpha_pro_hindi.add("एफ");
+        alpha_pro_hindi.add("जी");
+        alpha_pro_hindi.add("एच");
+        alpha_pro_hindi.add("आई");
+        alpha_pro_hindi.add("जे");
+        alpha_pro_hindi.add("के");
+        alpha_pro_hindi.add("एल");
+        alpha_pro_hindi.add("एम");
+        alpha_pro_hindi.add("एन");
+        alpha_pro_hindi.add("ओ");
+        alpha_pro_hindi.add("पी");
+        alpha_pro_hindi.add("क्यू");
+        alpha_pro_hindi.add("आर");
+        alpha_pro_hindi.add("एस");
+        alpha_pro_hindi.add("टी");
+        alpha_pro_hindi.add("यू");
+        alpha_pro_hindi.add("भी");
+        alpha_pro_hindi.add("डब्ल्लू");
+        alpha_pro_hindi.add("एक्स");
+        alpha_pro_hindi.add("वाय");
+        alpha_pro_hindi.add("जेड");
+
         next = (Button) findViewById(R.id.next);
 
         tts = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
@@ -66,7 +94,7 @@ public class Alphabets extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         RecyclerView recyclerView = findViewById(R.id.alpha);
         recyclerView.setLayoutManager(layoutManager);
-        AdapterAlphabets adapterAlphabets = new AdapterAlphabets(this, alphabet, tts);
+        AdapterAlphabets adapterAlphabets = new AdapterAlphabets(this, alphabet, alpha_pro_hindi, tts);
         recyclerView.setAdapter(adapterAlphabets);
 
         int total = adapterAlphabets.getItemCount() - 1;
@@ -77,17 +105,8 @@ public class Alphabets extends AppCompatActivity {
                 if (i<=total){
                     i++;
                     recyclerView.smoothScrollToPosition(i);
-
                 }
             }
         });
-
-//        recyclerView.post(new Runnable() {
-//            @Override
-//            public void run() {
-//                // Call smooth scroll
-//
-//            }
-//        });
     }
 }

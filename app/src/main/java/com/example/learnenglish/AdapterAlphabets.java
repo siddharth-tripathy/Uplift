@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,11 +20,14 @@ public class AdapterAlphabets extends RecyclerView.Adapter<AdapterAlphabets.MyVi
     private Context context;
     private ArrayList<String> alphabet = new ArrayList<>();
 
+    private ArrayList<String> alpha_pro_hindi = new ArrayList<>();
+
     TextToSpeech tts;
 
-    public AdapterAlphabets(Context context, ArrayList<String> alphabet,TextToSpeech tts) {
+    public AdapterAlphabets(Context context, ArrayList<String> alphabet, ArrayList<String> alpha_pro_hindi, TextToSpeech tts) {
         this.context = context;
         this.alphabet = alphabet;
+        this.alpha_pro_hindi = alpha_pro_hindi;
         this.tts = tts;
     }
 
@@ -37,7 +41,7 @@ public class AdapterAlphabets extends RecyclerView.Adapter<AdapterAlphabets.MyVi
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.alpha.setText(alphabet.get(position));
-
+        holder.hindiword.setText(alpha_pro_hindi.get(position));
         String a = holder.alpha.getText().toString();
 
         holder.play.setOnClickListener(new View.OnClickListener() {
@@ -57,13 +61,14 @@ public class AdapterAlphabets extends RecyclerView.Adapter<AdapterAlphabets.MyVi
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
 
-        TextView alpha;
-        Button play;
+        TextView alpha, hindiword;
+        ImageView play;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             alpha = itemView.findViewById(R.id.alpha);
             play = itemView.findViewById(R.id.play);
+            hindiword = itemView.findViewById(R.id.hindiword);
         }
     }
 }

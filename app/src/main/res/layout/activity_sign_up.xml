@@ -21,10 +21,29 @@
             android:layout_marginBottom="25dp"
             android:layout_gravity="bottom"
             android:textColor="@color/white"
+            android:fontFamily="@font/ubuntu_light"
             android:textSize="50dp"
             android:text="Sign Up"/>
 
     </LinearLayout>
+
+    <ImageView
+        android:layout_marginTop="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.6"
+        android:src="@drawable/app_logo"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.3"
+        android:fontFamily="cursive"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:text="uplift"
+        android:textColor="#4776e6"
+        android:textSize="34sp"/>
 
 
     <LinearLayout
@@ -39,43 +58,54 @@
             android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="13dp"
             android:background="@drawable/border"
-            android:padding="15dp"
-            android:textColor="@color/black"
-            android:textColorHint="#888888"
+            android:drawableStart="@drawable/baseline_account_circle_24"
+            android:drawablePadding="12dp"
             android:ems="10"
+            android:hint="Enter Name"
             android:inputType="text"
-            android:hint="Enter Name"/>
+            android:paddingStart="12dp"
+            android:paddingTop="12dp"
+            android:paddingEnd="12dp"
+            android:paddingBottom="12dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:textColorHint="#888888"
+            android:textColor="#222222"/>
 
         <EditText
             android:id="@+id/username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="13dp"
             android:background="@drawable/border"
-            android:padding="15dp"
-            android:textColor="@color/black"
-            android:textColorHint="#888888"
+            android:drawableStart="@drawable/baseline_email_24"
+            android:drawablePadding="12dp"
             android:ems="10"
-            android:inputType="number"
-            android:hint="Enter Mobile Number"/>
+            android:hint="Enter Mobile Number"
+            android:inputType="phone"
+            android:paddingStart="12dp"
+            android:paddingTop="12dp"
+            android:paddingEnd="12dp"
+            android:paddingBottom="12dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:textColorHint="#888888"
+            android:textColor="#222222"/>
 
         <EditText
             android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/border"
+            android:drawableStart="@drawable/baseline_vpn_key_24"
+            android:drawablePadding="12dp"
             android:padding="15dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="5dp"
+            android:paddingBottom="12dp"
             android:textColor="@color/black"
             android:textColorHint="#888888"
             android:ems="10"
@@ -87,9 +117,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/border"
+            android:drawableStart="@drawable/baseline_vpn_key_24"
+            android:drawablePadding="12dp"
             android:padding="15dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="20dp"
             android:textColor="@color/black"

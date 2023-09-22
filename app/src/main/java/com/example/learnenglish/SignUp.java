@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -34,6 +35,7 @@ public class SignUp extends AppCompatActivity {
     private FirebaseUser user;
 
     private FirebaseAuth mAuth;
+    ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +63,12 @@ public class SignUp extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Enter Correct Details", Toast.LENGTH_LONG).show();
                 }
                 else {
+                    progressDialog = new ProgressDialog(SignUp.this);
+
+                    progressDialog.setMessage("Please Wait...");
+                    progressDialog.setTitle("Creating Account...");
+                    progressDialog.setCanceledOnTouchOutside(false);
+                    progressDialog.show();
                     mAuth.createUserWithEmailAndPassword(email, password)
                             .addOnCompleteListener(SignUp.this, new OnCompleteListener<AuthResult>() {
                                 @Override
@@ -75,7 +83,6 @@ public class SignUp extends AppCompatActivity {
                                         data.put("number", num);
 //                                        city.put("country", "USA");
 
-
                                         db.collection("User").document(currentUser).set(data)
                                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                     @Override
@@ -85,12 +92,14 @@ public class SignUp extends AppCompatActivity {
                                                         a.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                                         startActivity(a);
                                                         finish();
+                                                        progressDialog.dismiss();
                                                     }
                                                 })
                                                 .addOnFailureListener(new OnFailureListener() {
                                                     @Override
                                                     public void onFailure(@NonNull Exception e) {
                                                         Toast.makeText(getApplicationContext(), "Sign-up Un Successful", Toast.LENGTH_LONG).show();
+                                                        progressDialog.dismiss();
                                                     }
                                                 });
                                     } else {

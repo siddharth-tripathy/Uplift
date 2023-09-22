@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/white"
-    tools:context=".Alphabets">
+    tools:context=".Sentences">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -20,25 +20,29 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:text="अक्षर"
+            android:text="वाक्यांश"
             android:textColor="@color/white"
             android:fontFamily="@font/ubuntu_light"
             android:textSize="28dp" />
+
+        <!--        <TextView-->
+        <!--            android:id="@+id/title_exp"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_centerVertical="true"-->
+        <!--            android:layout_marginLeft="30dp"-->
+        <!--            android:layout_marginRight="30dp"-->
+        <!--            android:layout_below="@+id/title"-->
+        <!--            android:text="वे अक्षर जो शब्द में दिखाई देते हैं लेकिन उच्चारित नहीं होते"-->
+        <!--            android:textColor="@color/white"-->
+        <!--            android:fontFamily="@font/ubuntu_light"-->
+        <!--            android:textSize="18dp" />-->
     </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/alpha"
-        android:layout_width="match_parent"
+        android:id="@+id/sent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"/>
+        android:layout_marginTop="10dp"/>
 
-    <Button
-        android:id="@+id/next"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/button_bg"
-        android:layout_margin="20dp"
-        android:textColor="#000428"
-        android:textSize="22sp"
-        android:text="अगला"/>
 </LinearLayout>
