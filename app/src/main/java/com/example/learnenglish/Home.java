@@ -1,5 +1,7 @@
 package com.example.learnenglish;
 
+import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
@@ -10,6 +12,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.MenuInflater;
@@ -31,6 +35,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import android.view.Menu;
 
@@ -39,15 +45,16 @@ import android.widget.Toast;
 
 public class Home extends AppCompatActivity {
 
-    ImageView tools, logistics, symbol, quality, safety, menu, words_arrow, alpha_arrow;
+    ImageView tools, logistics, symbol, quality, safety, menu, words_arrow, alpha_arrow, sent_arrow, words_sc, alpha_sc, sent_sc;
     TextView name;
     FirebaseFirestore db;
     FirebaseUser user;
-    CardView alphabets, grammar, words, sentences;
+    CardView alphabets, grammar, words, sentences, quiz_word;
     PopupMenu popup;
     MenuItem logout;
+    String alphaSc = "0", wordSc = "0", sentSc = "0";
     boolean vis = false, vis_alpha_options = false, quiz_alpha, quiz_words = false, quiz_sent = false;
-    LinearLayout view_words, alpha_options, silent, quiz_word, homop;
+    LinearLayout view_words, alpha_options, silent, homop;
     TextToSpeech tts;
     Button alpha_chpt, alpha_quiz;
     private FirebaseAuth mAuth;
@@ -71,9 +78,13 @@ public class Home extends AppCompatActivity {
         alpha_options = findViewById(R.id.alpha_options);
         alpha_options.setVisibility(View.GONE);
         alpha_arrow = findViewById(R.id.alpha_arrow);
+        sent_arrow = findViewById(R.id.sent_arrow);
         alpha_quiz = findViewById(R.id.alpha_quiz);
         alpha_chpt = findViewById(R.id.alpha_chpt);
         words_arrow = findViewById(R.id.words_arrow);
+        words_sc = findViewById(R.id.words_sc);
+        alpha_sc = findViewById(R.id.alpha_sc);
+        sent_sc = findViewById(R.id.sent_sc);
         sentences = findViewById(R.id.sentences);
         silent = findViewById(R.id.silent);
         quiz_word = findViewById(R.id.quiz_word);
@@ -253,7 +264,6 @@ public class Home extends AppCompatActivity {
                         }
                     }
                 });
-
             }
         });
         silent.setOnClickListener(new View.OnClickListener() {
@@ -294,7 +304,7 @@ public class Home extends AppCompatActivity {
                                 String sc = document.getString("Score");
 
                                 if(Integer.parseInt(sc)>=3){
-                                    Intent i = new Intent(Home.this, Sentences.class);
+                                    Intent i = new Intent(Home.this, QuizSent.class);
                                     startActivity(i);
                                 }
                                 else{
@@ -308,27 +318,151 @@ public class Home extends AppCompatActivity {
                 });
             }
         });
+
+
+
+
+
+
+
+
+        DocumentReference docRefAlpha = db.collection("User").document(currentUser).collection("Alphabets").document("Score");
+        docRefAlpha.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (!document.exists())
+                    {
+                        alphaSc = "0";
+                    }
+                    else{
+                        alphaSc = document.getString("Score");
+//                        Toast.makeText(Home.this, alphaSc, Toast.LENGTH_SHORT).show();
+                    }
+                    int sc = Integer.parseInt(alphaSc);
+//                    Toast.makeText(Home.this, String.valueOf(sc), Toast.LENGTH_SHORT).show();
+                    if(sc>=3){
+                        alpha_sc.setImageResource(R.drawable.trophy);
+                    }
+                    if(sc<3){
+                        words_arrow.setImageResource(R.drawable.baseline_lock_24);
+                    }
+                }
+                else {
+                    Log.d(TAG, "Failed with: ", task.getException());
+                }
+            }
+        });
+
+
+
+
+
+
+
+        DocumentReference docRefWord = db.collection("User").document(currentUser).collection("Words").document("Score");
+        docRefWord.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (!document.exists())
+                    {
+                        wordSc = "0";
+                    }
+                    else{
+                        wordSc = document.getString("Score");
+                    }
+                    int sc = Integer.parseInt(wordSc);
+//                    Toast.makeText(Home.this, String.valueOf(sc), Toast.LENGTH_SHORT).show();
+                    if(sc>=3){
+                        words_sc.setImageResource(R.drawable.trophy);
+                    }
+                    if(sc<3){
+                        sent_arrow.setImageResource(R.drawable.baseline_lock_24);
+                    }
+                }
+                else {
+                    Log.d(TAG, "Failed with: ", task.getException());
+                }
+            }
+        });
+
+
+
+
+
+        DocumentReference docRefSent = db.collection("User").document(currentUser).collection("Sentences").document("Score");
+        docRefSent.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (!document.exists())
+                    {
+                        sentSc = "0";
+                    }
+                    else{
+                        sentSc = document.getString("Score");
+                    }
+                    int sc = Integer.parseInt(sentSc);
+//                    Toast.makeText(Home.this, String.valueOf(sc), Toast.LENGTH_SHORT).show();
+                    if(sc>=3){
+                        sent_sc.setImageResource(R.drawable.trophy);
+                    }
+                }
+                else {
+                    Log.d(TAG, "Failed with: ", task.getException());
+                }
+            }
+        });
+
+
+
+
+
+
     }
 
-    // Handling the click events of the menu items
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Switching on the item id of the menu item
-//        switch (item.getItemId()) {
-//            case R.id.logout:
-//                // Code to be executed when the add button is clicked
-//                Toast.makeText(this, "Menu Item is Pressed", Toast.LENGTH_SHORT).show();
-//                return true;
-//            default:
-//                return super.onOptionsItemSelected(item);
-//        }
+    boolean doubleBackToExitPressedOnce = false;
 
-        int id = item.getItemId();
-        Toast.makeText(this, String.valueOf(id), Toast.LENGTH_SHORT).show();
-        if (id ==  R.id.logout){
-            Toast.makeText(this, "Menu Item is Pressed", Toast.LENGTH_SHORT).show();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+    @Override
+    public void onBackPressed() {
+//        if (doubleBackToExitPressedOnce) {
+//            super.onBackPressed();
+//            return;
+//        }
+//
+//        this.doubleBackToExitPressedOnce = true;
+//        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+//
+//        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+//
+//            @Override
+//            public void run() {
+//                doubleBackToExitPressedOnce=false;
+//            }
+//        }, 2000);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(Home.this);
+
+        builder.setMessage("क्या आप ऐप बंद करना चाहते हैं ?");
+
+        builder.setTitle("Alert !");
+
+        builder.setCancelable(false);
+
+        builder.setPositiveButton("हाँ", (DialogInterface.OnClickListener) (dialog, which) -> {
+            super.onBackPressed();
+            return;
+        });
+
+        builder.setNegativeButton("नहीं", (DialogInterface.OnClickListener) (dialog, which) -> {
+            dialog.cancel();
+        });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 }

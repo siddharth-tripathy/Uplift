@@ -13,6 +13,9 @@
         android:theme="@style/Theme.LearnEnglish"
         tools:targetApi="31">
         <activity
+            android:name=".QuizSent"
+            android:exported="false" />
+        <activity
             android:name=".Homophones"
             android:exported="false" />
         <activity

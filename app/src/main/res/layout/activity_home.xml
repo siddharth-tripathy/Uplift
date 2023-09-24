@@ -265,6 +265,15 @@
                                         android:textSize="23dp"
                                         android:textColor="@color/black"/>
                                 </LinearLayout>
+
+                                <ImageView
+                                    android:id="@+id/alpha_sc"
+                                    android:layout_width="24dp"
+                                    android:layout_height="24dp"
+                                    android:layout_toLeftOf="@id/alpha_arrow"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginRight="25dp"/>
+
                                 <ImageView
                                     android:id="@+id/alpha_arrow"
                                     android:layout_width="wrap_content"
@@ -369,6 +378,17 @@
                                 android:layout_centerVertical="true"
                                 android:layout_marginRight="25dp"
                                 android:src="@drawable/baseline_keyboard_arrow_right_24"/>
+
+
+                            <ImageView
+                                android:id="@+id/words_sc"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_toLeftOf="@id/words_arrow"
+                                android:layout_centerVertical="true"
+                                android:layout_marginRight="25dp"/>
+
+
 
                         </RelativeLayout>
 
@@ -512,6 +532,7 @@
                             android:background="#50C0C0C0" />
 
                         <androidx.cardview.widget.CardView
+                            android:id="@+id/quiz_word"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             app:cardBackgroundColor="@color/white">
@@ -532,7 +553,6 @@
 <!--                                    android:background="@drawable/sent_logo" />-->
 
                                 <LinearLayout
-                                    android:id="@+id/quiz_word"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_centerVertical="true"
@@ -629,6 +649,16 @@
                             </LinearLayout>
 
                             <ImageView
+                                android:id="@+id/sent_sc"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_toLeftOf="@id/sent_arrow"
+                                android:layout_centerVertical="true"
+                                android:layout_marginRight="25dp"/>
+
+
+                            <ImageView
+                                android:id="@+id/sent_arrow"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentRight="true"

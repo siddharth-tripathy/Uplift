@@ -3,8 +3,10 @@ package com.example.learnenglish;
 import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -38,7 +40,7 @@ public class Quiz extends AppCompatActivity {
     ImageButton ques;
     private FirebaseAuth mAuth;
     TextToSpeech tts;
-    String q, sc;
+    String q, sc="0";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -329,18 +331,70 @@ public class Quiz extends AppCompatActivity {
                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
-                                        Intent i = new Intent(Quiz.this, Home.class);
-                                        startActivity(i);
-                                        Toast.makeText(getApplicationContext(), "Your Score: " + String.valueOf(fSol), Toast.LENGTH_LONG).show();
-                                        finish();
+//                                        Intent i = new Intent(Quiz.this, Home.class);
+//                                        startActivity(i);
+//                                        Toast.makeText(getApplicationContext(), "Your Score: " + String.valueOf(fSol), Toast.LENGTH_LONG).show();
+//                                        finish();
+                                        AlertDialog.Builder builder = new AlertDialog.Builder(Quiz.this);
+
+                                        builder.setMessage("आपका स्कोर: " + String.valueOf(fSol));
+
+//                                        builder.setTitle("Alert !");
+
+                                        builder.setCancelable(false);
+
+                                        builder.setPositiveButton("ठीक है", (DialogInterface.OnClickListener) (dialog, which) -> {
+                                            Intent i = new Intent(Quiz.this, Home.class);
+                                            startActivity(i);
+//                                            Toast.makeText(getApplicationContext(), "Your Score: " + String.valueOf(fSol), Toast.LENGTH_LONG).show();
+                                            finish();
+                                        });
+
+                                        builder.setNegativeButton("पुन: प्रयास करें", (DialogInterface.OnClickListener) (dialog, which) -> {
+                                            Intent i = new Intent(Quiz.this, Quiz.class);
+                                            startActivity(i);
+                                            finish();
+                                        });
+
+                                        AlertDialog alertDialog = builder.create();
+                                        alertDialog.show();
                                     }
                                 });
                     }
                     else{
-                        Intent i = new Intent(Quiz.this, Home.class);
-                        startActivity(i);
-                        Toast.makeText(getApplicationContext(), "Your Score: " + String.valueOf(fSol), Toast.LENGTH_LONG).show();
-                        finish();
+//                        Intent i = new Intent(Quiz.this, Home.class);
+//                        startActivity(i);
+//                        Toast.makeText(getApplicationContext(), "Your Score: " + String.valueOf(fSol), Toast.LENGTH_LONG).show();
+//                        finish();
+                        AlertDialog.Builder builder = new AlertDialog.Builder(Quiz.this);
+
+                        builder.setMessage("आपका स्कोर: " + String.valueOf(fSol));
+
+//                                        builder.setTitle("Alert !");
+
+                        builder.setCancelable(false);
+
+                        builder.setPositiveButton("ठीक है", (DialogInterface.OnClickListener) (dialog, which) -> {
+                            Intent i = new Intent(Quiz.this, Home.class);
+                            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(i);
+
+//                                            Toast.makeText(getApplicationContext(), "Your Score: " + String.valueOf(fSol), Toast.LENGTH_LONG).show();
+                            finish();
+                        });
+
+                        builder.setNegativeButton("पुन: प्रयास करें", (DialogInterface.OnClickListener) (dialog, which) -> {
+                            Intent i = new Intent(Quiz.this, Quiz.class);
+                            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(i);
+                            finish();
+                        });
+
+                        AlertDialog alertDialog = builder.create();
+                        alertDialog.show();
                     }
 
                 }
