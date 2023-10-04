@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,6 +42,8 @@ public class Quiz extends AppCompatActivity {
     private FirebaseAuth mAuth;
     TextToSpeech tts;
     String q, sc="0";
+    boolean marked = false;
+    ImageView resultSymbol;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +56,8 @@ public class Quiz extends AppCompatActivity {
         opt4 = findViewById(R.id.opt4);
 
         next = findViewById(R.id.next);
+
+        resultSymbol = findViewById(R.id.resultSymbol);
 
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
@@ -210,6 +215,10 @@ public class Quiz extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
+
+                marked = false;
+                resultSymbol.setVisibility(View.GONE);
+
                 Drawable drawable2 = getResources().getDrawable(R.drawable.border);
                 opt2.setBackground(drawable2);
                 opt1.setBackground(drawable2);
@@ -418,29 +427,48 @@ public class Quiz extends AppCompatActivity {
         opt1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Drawable drawable = getResources().getDrawable(R.drawable.button_bg);
-                opt1.setBackground(drawable);
-                Drawable drawable2 = getResources().getDrawable(R.drawable.border);
-                opt2.setBackground(drawable2);
-                opt3.setBackground(drawable2);
-                opt4.setBackground(drawable2);
-                if(sol==1){
-                    fSol++;
+                resultSymbol.setVisibility(View.VISIBLE);
+                if(!marked){
+                    Drawable drawable = getResources().getDrawable(R.drawable.button_bg);
+                    opt1.setBackground(drawable);
+                    Drawable drawable3 = getResources().getDrawable(R.drawable.disabled);
+                    opt2.setBackground(drawable3);
+                    opt3.setBackground(drawable3);
+                    opt4.setBackground(drawable3);
+                    if(sol==1){
+                        fSol++;
+                        resultSymbol.setImageResource(R.drawable.correct);
+                    }
+                    else {
+                        resultSymbol.setImageResource(R.drawable.incorrect);
+                    }
+                    marked = true;
+//                    next.performClick();
                 }
+
             }
         });
 
         opt4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Drawable drawable = getResources().getDrawable(R.drawable.button_bg);
-                opt4.setBackground(drawable);
-                Drawable drawable2 = getResources().getDrawable(R.drawable.border);
-                opt2.setBackground(drawable2);
-                opt3.setBackground(drawable2);
-                opt1.setBackground(drawable2);
-                if(sol==4){
-                    fSol++;
+                resultSymbol.setVisibility(View.VISIBLE);
+                if(!marked){
+                    Drawable drawable = getResources().getDrawable(R.drawable.button_bg);
+                    opt4.setBackground(drawable);
+                    Drawable drawable3 = getResources().getDrawable(R.drawable.disabled);
+                    opt2.setBackground(drawable3);
+                    opt3.setBackground(drawable3);
+                    opt1.setBackground(drawable3);
+                    if(sol==4){
+                        fSol++;
+                        resultSymbol.setImageResource(R.drawable.correct);
+                    }
+                    else {
+                        resultSymbol.setImageResource(R.drawable.incorrect);
+                    }
+                    marked = true;
+//                    next.performClick();
                 }
             }
         });
@@ -448,30 +476,51 @@ public class Quiz extends AppCompatActivity {
         opt2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Drawable drawable = getResources().getDrawable(R.drawable.button_bg);
-                opt2.setBackground(drawable);
-                Drawable drawable2 = getResources().getDrawable(R.drawable.border);
-                opt1.setBackground(drawable2);
-                opt3.setBackground(drawable2);
-                opt4.setBackground(drawable2);
-                if(sol==2){
-                    fSol++;
+                resultSymbol.setVisibility(View.VISIBLE);
+                if(!marked){
+                    Drawable drawable = getResources().getDrawable(R.drawable.button_bg);
+                    opt2.setBackground(drawable);
+                    Drawable drawable3 = getResources().getDrawable(R.drawable.disabled);
+                    opt1.setBackground(drawable3);
+                    opt3.setBackground(drawable3);
+                    opt4.setBackground(drawable3);
+                    if(sol==2){
+                        fSol++;
+                        resultSymbol.setImageResource(R.drawable.correct);
+                    }
+                    else {
+                        resultSymbol.setImageResource(R.drawable.incorrect);
+                    }
+                    marked = true;
+//                    next.performClick();
                 }
+
             }
         });
 
         opt3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Drawable drawable = getResources().getDrawable(R.drawable.button_bg);
-                opt3.setBackground(drawable);
-                Drawable drawable2 = getResources().getDrawable(R.drawable.border);
-                opt2.setBackground(drawable2);
-                opt1.setBackground(drawable2);
-                opt4.setBackground(drawable2);
-                if(sol==3){
-                    fSol++;
+                resultSymbol.setVisibility(View.VISIBLE);
+                if(!marked){
+                    Drawable drawable = getResources().getDrawable(R.drawable.button_bg);
+                    opt3.setBackground(drawable);
+                    Drawable drawable3 = getResources().getDrawable(R.drawable.disabled);
+                    opt2.setBackground(drawable3);
+                    opt1.setBackground(drawable3);
+                    opt4.setBackground(drawable3);
+                    if(sol==3){
+                        fSol++;
+                        resultSymbol.setImageResource(R.drawable.correct);
+                    }
+                    else {
+                        resultSymbol.setImageResource(R.drawable.incorrect);
+                    }
+                    marked=true;
+//                    next.performClick();
                 }
+
+
             }
         });
     }

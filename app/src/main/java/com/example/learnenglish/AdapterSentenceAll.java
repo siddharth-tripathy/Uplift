@@ -14,30 +14,30 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class AdapterSentences extends RecyclerView.Adapter<AdapterSentences.MyViewHolder> {
+public class AdapterSentenceAll extends RecyclerView.Adapter<AdapterSentenceAll.MyViewHolder> {
 
     Context context;
-    ArrayList<ModelSentences> modelSentences;
+    ArrayList<ModelSentenceAll> modelSentencesAll;
     public TextToSpeech tts;
 
-    public AdapterSentences(Context context, ArrayList<ModelSentences> modelSentences, TextToSpeech tts) {
+    public AdapterSentenceAll(Context context, ArrayList<ModelSentenceAll> modelSentencesAll, TextToSpeech tts) {
         this.context = context;
-        this.modelSentences = modelSentences;
+        this.modelSentencesAll = modelSentencesAll;
         this.tts = tts;
     }
 
     @NonNull
     @Override
-    public AdapterSentences.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public AdapterSentenceAll.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(context).inflate(R.layout.layout_sentences, parent, false);
-        return new AdapterSentences.MyViewHolder(v);
+        return new AdapterSentenceAll.MyViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdapterSentences.MyViewHolder holder, int position) {
-        ModelSentences model = modelSentences.get(position);
-        String eng_name = model.English;
-        String hindi_name = model.Hindi;
+    public void onBindViewHolder(@NonNull AdapterSentenceAll.MyViewHolder holder, int position) {
+        ModelSentenceAll model = modelSentencesAll.get(position);
+        String eng_name = model.EnglishSentence;
+        String hindi_name = model.HindiSentence;
         holder.ModelEnglish.setText(eng_name);
         holder.ModelHindi.setText(hindi_name);
         holder.play.setOnClickListener(new View.OnClickListener() {
@@ -52,7 +52,7 @@ public class AdapterSentences extends RecyclerView.Adapter<AdapterSentences.MyVi
 
     @Override
     public int getItemCount() {
-        return modelSentences.size();
+        return modelSentencesAll.size();
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {

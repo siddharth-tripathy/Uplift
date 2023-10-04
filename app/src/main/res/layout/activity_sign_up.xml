@@ -23,7 +23,7 @@
             android:textColor="@color/white"
             android:fontFamily="@font/ubuntu_light"
             android:textSize="50dp"
-            android:text="Sign Up"/>
+            android:text="साइन-अप"/>
 
     </LinearLayout>
 
@@ -62,7 +62,7 @@
             android:drawableStart="@drawable/baseline_account_circle_24"
             android:drawablePadding="12dp"
             android:ems="10"
-            android:hint="Enter Name"
+            android:hint="नाम दर्ज करें"
             android:inputType="text"
             android:paddingStart="12dp"
             android:paddingTop="12dp"
@@ -79,10 +79,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/border"
-            android:drawableStart="@drawable/baseline_email_24"
+            android:drawableStart="@drawable/baseline_contact_phone_24"
             android:drawablePadding="12dp"
             android:ems="10"
-            android:hint="Enter Mobile Number"
+            android:hint="मोबाइल नंबर दर्ज करें"
             android:inputType="phone"
             android:paddingStart="12dp"
             android:paddingTop="12dp"
@@ -110,7 +110,7 @@
             android:textColorHint="#888888"
             android:ems="10"
             android:inputType="textPassword"
-            android:hint="Enter Password"/>
+            android:hint="पास वर्ड दर्ज करें"/>
 
         <EditText
             android:id="@+id/confirmPassword"
@@ -128,7 +128,7 @@
             android:textColorHint="#888888"
             android:ems="10"
             android:inputType="textPassword"
-            android:hint="Enter Password"/>
+            android:hint="पासवर्ड फिर से दर्ज करें"/>
 
         <Button
             android:id="@+id/submit"
@@ -138,8 +138,9 @@
             android:backgroundTint="#031C4B"
             android:layout_margin="20dp"
             android:padding="15dp"
+            android:textSize="17sp"
             android:textColor="@color/white"
-            android:text="Sign Up" />
+            android:text="साइन अप" />
 
     </LinearLayout>
 

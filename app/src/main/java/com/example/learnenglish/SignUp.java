@@ -60,13 +60,13 @@ public class SignUp extends AppCompatActivity {
                 email += "@learnEnglish.com";
 
                 if(verify(num, password, cpass, nm)){
-                    Toast.makeText(getApplicationContext(), "Enter Correct Details", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "सही विवरण दर्ज करें", Toast.LENGTH_LONG).show();
                 }
                 else {
                     progressDialog = new ProgressDialog(SignUp.this);
 
-                    progressDialog.setMessage("Please Wait...");
-                    progressDialog.setTitle("Creating Account...");
+                    progressDialog.setMessage("कृपया प्रतीक्षा करें...");
+                    progressDialog.setTitle("अकाउंट बन रहा है...");
                     progressDialog.setCanceledOnTouchOutside(false);
                     progressDialog.show();
                     mAuth.createUserWithEmailAndPassword(email, password)
@@ -87,9 +87,9 @@ public class SignUp extends AppCompatActivity {
                                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                     @Override
                                                     public void onComplete(@NonNull Task<Void> task) {
-                                                        Toast.makeText(getApplicationContext(), "Sign-up Successful", Toast.LENGTH_LONG).show();
+                                                        Toast.makeText(getApplicationContext(), "साइन-अप सफल", Toast.LENGTH_LONG).show();
                                                         Intent a = new Intent(SignUp.this, Home.class);
-                                                        a.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                                        a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                                         startActivity(a);
                                                         finish();
                                                         progressDialog.dismiss();
@@ -98,12 +98,12 @@ public class SignUp extends AppCompatActivity {
                                                 .addOnFailureListener(new OnFailureListener() {
                                                     @Override
                                                     public void onFailure(@NonNull Exception e) {
-                                                        Toast.makeText(getApplicationContext(), "Sign-up Un Successful", Toast.LENGTH_LONG).show();
+                                                        Toast.makeText(getApplicationContext(), "साइन-अप असफल", Toast.LENGTH_LONG).show();
                                                         progressDialog.dismiss();
                                                     }
                                                 });
                                     } else {
-                                        Toast.makeText(getApplicationContext(), "Couldn't Sign-up", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(getApplicationContext(), "साइन-अप असफल", Toast.LENGTH_LONG).show();
                                     }
                                 }
                             });

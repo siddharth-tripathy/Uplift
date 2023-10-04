@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,8 +41,9 @@ public class QuizSent extends AppCompatActivity {
     int qNo = 0, fSol = 0, q=0;
     int ques[] = {};
     FirebaseFirestore db;
-    boolean ans = false;
-    String mean = "कृपया उत्पादों को सही ढंग से लेबल करें। ", sc = "0", opt1;
+    boolean ans = false, marked=false;
+    String mean = "कृपया उत्पादों को सही ढंग से लेबल करें। ", sc = "0", opt1 = "Please label products correctly.";
+    ImageView resultSymbol;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -162,6 +164,7 @@ public class QuizSent extends AppCompatActivity {
         TextView means1 = findViewById(R.id.means1);
         TextView opt3 = findViewById(R.id.opt3);
         TextView opt4 = findViewById(R.id.opt4);
+        resultSymbol = findViewById(R.id.resultSymbol);
 
 //        db = FirebaseFirestore.getInstance();
 
@@ -218,6 +221,8 @@ public class QuizSent extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                resultSymbol.setVisibility(View.GONE);
+                marked = false;
                 Drawable drawable2 = getResources().getDrawable(R.drawable.border);
                 opt4.setBackground(drawable2);
                 opt3.setBackground(drawable2);
@@ -367,24 +372,43 @@ public class QuizSent extends AppCompatActivity {
         opt3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Drawable drawable = getResources().getDrawable(R.drawable.button_bg);
-                opt3.setBackground(drawable);
-                Drawable drawable2 = getResources().getDrawable(R.drawable.border);
-                opt4.setBackground(drawable2);
-                if (ans) {
-                    fSol++;
+                resultSymbol.setVisibility(View.VISIBLE);
+                if(!marked){
+                    Drawable drawable = getResources().getDrawable(R.drawable.button_bg);
+                    opt3.setBackground(drawable);
+                    Drawable drawable3 = getResources().getDrawable(R.drawable.disabled);
+                    opt4.setBackground(drawable3);
+                    if (ans) {
+                        fSol++;
+                        resultSymbol.setImageResource(R.drawable.correct);
+                    }
+                    else {
+                        resultSymbol.setImageResource(R.drawable.incorrect);
+                    }
+                    marked=true;
+//                    next.performClick();
                 }
+
             }
         });
         opt4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Drawable drawable = getResources().getDrawable(R.drawable.button_bg);
-                opt4.setBackground(drawable);
-                Drawable drawable2 = getResources().getDrawable(R.drawable.border);
-                opt3.setBackground(drawable2);
-                if (!ans) {
-                    fSol++;
+                resultSymbol.setVisibility(View.VISIBLE);
+                if(!marked){
+                    Drawable drawable = getResources().getDrawable(R.drawable.button_bg);
+                    opt4.setBackground(drawable);
+                    Drawable drawable3 = getResources().getDrawable(R.drawable.disabled);
+                    opt3.setBackground(drawable3);
+                    if (!ans) {
+                        fSol++;
+                        resultSymbol.setImageResource(R.drawable.correct);
+                    }
+                    else {
+                        resultSymbol.setImageResource(R.drawable.incorrect);
+                    }
+                    marked=true;
+//                    next.performClick();
                 }
             }
         });

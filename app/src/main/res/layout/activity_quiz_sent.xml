@@ -20,7 +20,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:text="शब्द प्रश्नोत्तरी"
+            android:text="वाक्य प्रश्नोत्तरी"
             android:textColor="@color/white"
             android:fontFamily="@font/ubuntu_light"
             android:textSize="28dp" />
@@ -116,9 +116,19 @@
         android:layout_gravity="right"
         android:layout_margin="20dp"
         android:text="अगला"
-        android:textColor="@color/white"
         android:textSize="20sp"
-        android:background="#062868"/>
+        android:background="@drawable/border"
+        android:backgroundTint="#031C4B"
+        android:textColor="@color/white"/>
+
+    <ImageView
+        android:id="@+id/resultSymbol"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/correct"
+        android:layout_gravity="center_horizontal"
+        android:visibility="gone"/>
+
 
 
 

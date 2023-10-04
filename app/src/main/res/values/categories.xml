@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="categories">
+        <item>--FILTER--</item>
+        <item>Seeking for Help</item>
+        <item>Requests</item>
+        <item>Expressing Gratitude</item>
+        <item>Apologies</item>
+        <item>Greetings</item>
+    </string-array>
+</resources>

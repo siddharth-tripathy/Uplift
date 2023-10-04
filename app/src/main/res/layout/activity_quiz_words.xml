@@ -162,4 +162,13 @@
         android:textSize="20sp"
         android:background="#00FF00"/>
 
+    <ImageView
+        android:id="@+id/resultSymbol"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/correct"
+        android:layout_gravity="center_horizontal"
+        android:visibility="gone"/>
+
+
 </LinearLayout>

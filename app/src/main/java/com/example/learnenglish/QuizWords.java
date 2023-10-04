@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,8 +44,8 @@ public class QuizWords extends AppCompatActivity {
     String sc = "0";
     int ques[] = {}, q=0, qNo = 0;
     int quesS[] = {};
-
-    boolean ans;
+    ImageView resultSymbol;
+    boolean ans, marked=false;
     String mean = "इसका", opt1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +59,7 @@ public class QuizWords extends AppCompatActivity {
         opt3 = findViewById(R.id.opt3);
         opt4 = findViewById(R.id.opt4);
         next = findViewById(R.id.next);
+        resultSymbol = findViewById(R.id.resultSymbol);
 //        quest1.setText(ques1[i]);
 //        quest2.setText(ques2[i]);
 //        means1.setText(mean1[i]);
@@ -155,7 +157,7 @@ public class QuizWords extends AppCompatActivity {
 
 
         if(qNo<=3){
-            Toast.makeText(QuizWords.this, String.valueOf(q), Toast.LENGTH_SHORT).show();
+//            Toast.makeText(QuizWords.this, String.valueOf(q), Toast.LENGTH_SHORT).show();
             db.collection("Homophones").whereEqualTo("id", String.valueOf(q))
                     .get()
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -252,7 +254,9 @@ public class QuizWords extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Toast.makeText(QuizWords.this, String.valueOf(qNo), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(QuizWords.this, String.valueOf(qNo), Toast.LENGTH_SHORT).show();
+                resultSymbol.setVisibility(View.GONE);
+                marked = false;
 
                 Drawable drawable2 = getResources().getDrawable(R.drawable.border);
                 opt4.setBackground(drawable2);
@@ -280,6 +284,8 @@ public class QuizWords extends AppCompatActivity {
                                         builder.setMessage("आपका स्कोर: " + String.valueOf(fSol));
 
                                         builder.setTitle("Words");
+
+
 
                                         builder.setCancelable(false);
 
@@ -331,7 +337,7 @@ public class QuizWords extends AppCompatActivity {
 
                 } else {
                     if(qNo<=5){
-                        Toast.makeText(QuizWords.this, String.valueOf(q), Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(QuizWords.this, String.valueOf(q), Toast.LENGTH_SHORT).show();
                         db.collection("Homophones").whereEqualTo("id", String.valueOf(q))
                                 .get()
                                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -426,25 +432,44 @@ public class QuizWords extends AppCompatActivity {
         opt3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Drawable drawable = getResources().getDrawable(R.drawable.button_bg);
-                opt3.setBackground(drawable);
-                Drawable drawable2 = getResources().getDrawable(R.drawable.border);
-                opt4.setBackground(drawable2);
-                if (ans) {
-                    fSol++;
+                resultSymbol.setVisibility(View.VISIBLE);
+                if (!marked) {
+                    Drawable drawable = getResources().getDrawable(R.drawable.button_bg);
+                    opt3.setBackground(drawable);
+                    Drawable drawable3 = getResources().getDrawable(R.drawable.disabled);
+                    opt4.setBackground(drawable3);
+                    if (ans) {
+                        fSol++;
+                        resultSymbol.setImageResource(R.drawable.correct);
+                    }
+                    else {
+                        resultSymbol.setImageResource(R.drawable.incorrect);
+                    }
+                    marked=true;
+//                    next.performClick();
                 }
+
             }
         });
 
         opt4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Drawable drawable = getResources().getDrawable(R.drawable.button_bg);
-                opt4.setBackground(drawable);
-                Drawable drawable2 = getResources().getDrawable(R.drawable.border);
-                opt3.setBackground(drawable2);
-                if (!ans) {
-                    fSol++;
+                resultSymbol.setVisibility(View.VISIBLE);
+                if(!marked){
+                    Drawable drawable = getResources().getDrawable(R.drawable.button_bg);
+                    opt4.setBackground(drawable);
+                    Drawable drawable3 = getResources().getDrawable(R.drawable.disabled);
+                    opt3.setBackground(drawable3);
+                    if (!ans) {
+                        fSol++;
+                        resultSymbol.setImageResource(R.drawable.correct);
+                    }
+                    else {
+                        resultSymbol.setImageResource(R.drawable.incorrect);
+                    }
+                    marked=true;
+//                    next.performClick();
                 }
             }
         });

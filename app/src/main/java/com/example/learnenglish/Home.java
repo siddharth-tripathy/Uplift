@@ -53,10 +53,10 @@ public class Home extends AppCompatActivity {
     PopupMenu popup;
     MenuItem logout;
     String alphaSc = "0", wordSc = "0", sentSc = "0";
-    boolean vis = false, vis_alpha_options = false, quiz_alpha, quiz_words = false, quiz_sent = false;
-    LinearLayout view_words, alpha_options, silent, homop;
+    boolean vis = false, vis_alpha_options = false, quiz_alpha, quiz_words = false, quiz_sent = false, vis_sent = false;
+    LinearLayout view_words, alpha_options, silent, homop, sent_options;
     TextToSpeech tts;
-    Button alpha_chpt, alpha_quiz;
+    Button alpha_chpt, alpha_quiz, sent_chpt, sent_quiz;
     private FirebaseAuth mAuth;
 
     @Override
@@ -77,6 +77,10 @@ public class Home extends AppCompatActivity {
         view_words = findViewById(R.id.view_words);
         alpha_options = findViewById(R.id.alpha_options);
         alpha_options.setVisibility(View.GONE);
+        sent_options = findViewById(R.id.sent_options);
+        sent_options.setVisibility(View.GONE);
+        sent_chpt = findViewById(R.id.sent_chpt);
+        sent_quiz = findViewById(R.id.sent_quiz);
         alpha_arrow = findViewById(R.id.alpha_arrow);
         sent_arrow = findViewById(R.id.sent_arrow);
         alpha_quiz = findViewById(R.id.alpha_quiz);
@@ -102,7 +106,7 @@ public class Home extends AppCompatActivity {
 
                 builder.setMessage("क्या आप लॉगआउट करना चाहते हैं ?");
 
-                builder.setTitle("Alert !");
+//                builder.setTitle("Alert !");
 
                 builder.setCancelable(false);
 
@@ -304,8 +308,17 @@ public class Home extends AppCompatActivity {
                                 String sc = document.getString("Score");
 
                                 if(Integer.parseInt(sc)>=3){
-                                    Intent i = new Intent(Home.this, QuizSent.class);
-                                    startActivity(i);
+
+                                    if (vis_sent){
+                                        vis_sent = false;
+                                        sent_options.setVisibility(View.GONE);
+                                        sent_arrow.setImageResource(R.drawable.baseline_keyboard_arrow_right_24);
+                                    }
+                                    else{
+                                        vis_sent = true;
+                                        sent_arrow.setImageResource(R.drawable.baseline_keyboard_arrow_down_24);
+                                        sent_options.setVisibility(View.VISIBLE);
+                                    }
                                 }
                                 else{
                                     Toast.makeText(Home.this, "पिछले अध्याय की प्रश्नोत्तरी पूरी करें", Toast.LENGTH_SHORT).show();
@@ -318,6 +331,24 @@ public class Home extends AppCompatActivity {
                 });
             }
         });
+
+        sent_chpt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Home.this, Sentences.class);
+                startActivity(i);
+            }
+        });
+
+        sent_quiz.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Home.this, QuizSent.class);
+                startActivity(i);
+            }
+        });
+
+
 
 
 
@@ -449,7 +480,7 @@ public class Home extends AppCompatActivity {
 
         builder.setMessage("क्या आप ऐप बंद करना चाहते हैं ?");
 
-        builder.setTitle("Alert !");
+//        builder.setTitle("Alert !");
 
         builder.setCancelable(false);
 

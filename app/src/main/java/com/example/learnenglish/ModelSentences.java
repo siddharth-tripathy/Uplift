@@ -1,29 +1,29 @@
 package com.example.learnenglish;
 
 public class ModelSentences {
-    String EnglishSentence, HindiSentence;
+    String English, Hindi;
+
+    public ModelSentences(String english, String hindi) {
+        English = english;
+        Hindi = hindi;
+    }
 
     public ModelSentences() {
     }
 
-    public ModelSentences(String englishSentence, String hindiSentence) {
-        EnglishSentence = englishSentence;
-        HindiSentence = hindiSentence;
+    public String getEnglish() {
+        return English;
     }
 
-    public String getEnglishSentence() {
-        return EnglishSentence;
+    public void setEnglish(String english) {
+        English = english;
     }
 
-    public void setEnglishSentence(String englishSentence) {
-        EnglishSentence = englishSentence;
+    public String getHindi() {
+        return Hindi;
     }
 
-    public String getHindiSentence() {
-        return HindiSentence;
-    }
-
-    public void setHindiSentence(String hindiSentence) {
-        HindiSentence = hindiSentence;
+    public void setHindi(String hindi) {
+        Hindi = hindi;
     }
 }
